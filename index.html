@@ -15,7 +15,7 @@
         }
 
         /* Conteneur centré verticalement et horizontalement */
-        #container {
+        #containerC {
             display: flex;
             flex-direction: column;
             justify-content: top;
@@ -25,7 +25,7 @@
         }
 
         /* Style du bouton */
-        #testButton {
+        #testButtonC {
             background-color: green;
             color: white;
             font-size: 20px;
@@ -35,12 +35,12 @@
             border-radius: 5px;
         }
 
-        #testButton:hover {
+        #testButtonC:hover {
             background-color: darkgreen;
         }
 
-        /* Zone d'affichage du message */
-        #message {
+        /* Zone d'affichage du messageC */
+        #messageC {
             margin-top: 20px;
             font-size: 18px;
             color: black;
@@ -50,9 +50,9 @@
     
 </head>
 <body>
-    <div id="container">
-        <button id="testButton">Test</button>
-        <div id="message"></div>
+    <div id="containerC">
+        <button id="testButtonC">Test</button>
+        <div id="messageC"></div>
     </div>
     <script>
         let userInput = [];
@@ -64,7 +64,7 @@
             let key = event.key.toUpperCase();
             if (/^[A-Z]$/.test(key) && !userInput.includes(key)) {
                 userInput.push(key);  // Ajoute la lettre à la liste
-                document.getElementById("testButton").innerText = userInput.join(''); // Met à jour le texte du bouton
+                document.getElementById("testButtonC").innerText = userInput.join(''); // Met à jour le texte du bouton
 
                 bipSound.play(); // Joue le bip à chaque saisie
             }
@@ -82,24 +82,24 @@
         function checkAnswer() {
             const correct = ["I", "U", "N"];
             let correctLetters = userInput.filter(letter => correct.includes(letter)).length;
-            let message = "";
+            let messageC = "";
 
             if (userInput.join('') === "IUN") {
-                message = "🎉 Parfait !";
+                messageC = "🎉 Parfait !";
             } else if (correctLetters === 3) {
-                message = "✅ Cartes:OK, ordre:KO.";
+                messageC = "✅ Cartes:OK, ordre:KO.";
             } else {
-                message = `❌ ${correctLetters} carte(s) OK.`;
+                messageC = `❌ ${correctLetters} carte(s) OK.`;
             }
 
-            document.getElementById("message").innerText = message;
+            document.getElementById("messageC").innerText = messageC;
         }
 
         // Réinitialisation du test au clic du bouton
-        document.getElementById("testButton").addEventListener("click", function () {
+        document.getElementById("testButtonC").addEventListener("click", function () {
             userInput = [];
-            document.getElementById("message").innerText = "";
-            document.getElementById("testButton").innerText = "Test";  // Réinitialise le bouton
+            document.getElementById("messageC").innerText = "";
+            document.getElementById("testButtonC").innerText = "Test";  // Réinitialise le bouton
             setTimeout(function () {
         startSound.play(); // Joue le son après 200ms
     }, 200);
