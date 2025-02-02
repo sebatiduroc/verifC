@@ -47,10 +47,18 @@
             font-weight: bold;
         }
     </style>
+    
+</head>
+<body>
+    <div id="container">
+        <button id="testButton">Test</button>
+        <div id="message"></div>
+    </div>
     <script>
         let userInput = [];
         const bipSound = new Audio("https://lasonotheque.org/UPLOAD/wav/2235.wav");
-
+        const startSound = new Audio("https://lasonotheque.org/UPLOAD/wav/1111.wav");
+        
         // Lorsque l'utilisateur appuie sur une touche
         document.addEventListener("keydown", function (event) {
             let key = event.key.toUpperCase();
@@ -64,9 +72,9 @@
             if (userInput.length === 3) {
                 checkAnswer();
                 userInput = [];
-                setTimeout(function() {
-                    document.getElementById("testButton").innerText = "Test"; // Réinitialise le texte du bouton après 2 secondes
-                }, 2000);
+                setTimeout(function () {
+        startSound.play().catch(error => console.log("Erreur de lecture audio :", error)); // Tente de jouer le son avec gestion d'erreur
+    }, 200);
             }
         });
 
@@ -92,13 +100,10 @@
             userInput = [];
             document.getElementById("message").innerText = "";
             document.getElementById("testButton").innerText = "Test";  // Réinitialise le bouton
+            setTimeout(function () {
+        startSound.play(); // Joue le son après 200ms
+    }, 200);
         });
     </script>
-</head>
-<body>
-    <div id="container">
-        <button id="testButton">Test</button>
-        <div id="message"></div>
-    </div>
 </body>
 </html>
