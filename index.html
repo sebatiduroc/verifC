@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test JavaScript</title>
+    <style>
+        /* Empêche le défilement et occupe toute la hauteur */
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden; /* Empêche l'ascenseur */
+            font-family: Arial, sans-serif;
+            background-color: #888888;
+        }
+
+        /* Conteneur centré verticalement et horizontalement */
+        #container {
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            align-items: top;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Style du bouton */
+        #testButton {
+            background-color: green;
+            color: white;
+            font-size: 20px;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #testButton:hover {
+            background-color: darkgreen;
+        }
+
+        /* Zone d'affichage du message */
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        let userInput = [];
+        const bipSound = new Audio("https://lasonotheque.org/UPLOAD/wav/2235.wav");
+
+        // Lorsque l'utilisateur appuie sur une touche
+        document.addEventListener("keydown", function (event) {
+            let key = event.key.toUpperCase();
+            if (/^[A-Z]$/.test(key) && !userInput.includes(key)) {
+                userInput.push(key);  // Ajoute la lettre à la liste
+                document.getElementById("testButton").innerText = userInput.join(''); // Met à jour le texte du bouton
+
+                bipSound.play(); // Joue le bip à chaque saisie
+            }
+
+            if (userInput.length === 3) {
+                checkAnswer();
+                userInput = [];
+                setTimeout(function() {
+                    document.getElementById("testButton").innerText = "Test"; // Réinitialise le texte du bouton après 2 secondes
+                }, 2000);
+            }
+        });
+
+        // Vérifie si la réponse est correcte
+        function checkAnswer() {
+            const correct = ["I", "U", "N"];
+            let correctLetters = userInput.filter(letter => correct.includes(letter)).length;
+            let message = "";
+
+            if (userInput.join('') === "IUN") {
+                message = "🎉 Parfait !";
+            } else if (correctLetters === 3) {
+                message = "✅ Cartes:OK, ordre:KO.";
+            } else {
+                message = `❌ ${correctLetters} carte(s) OK.`;
+            }
+
+            document.getElementById("message").innerText = message;
+        }
+
+        // Réinitialisation du test au clic du bouton
+        document.getElementById("testButton").addEventListener("click", function () {
+            userInput = [];
+            document.getElementById("message").innerText = "";
+            document.getElementById("testButton").innerText = "Test";  // Réinitialise le bouton
+        });
+    </script>
+</head>
+<body>
+    <div id="container">
+        <button id="testButton">Test</button>
+        <div id="message"></div>
+    </div>
+</body>
+</html>
