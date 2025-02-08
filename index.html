@@ -62,7 +62,7 @@
         // Lorsque l'utilisateur appuie sur une touche
         document.addEventListener("keydown", function (event) {
             let key = event.key.toUpperCase();
-            if (/^[A-Z]$/.test(key) && !userInput.includes(key)) {
+            if (/^[HOUTSGINM]$/.test(key) && !userInput.includes(key)) {
                 userInput.push(key);  // Ajoute la lettre à la liste
                 document.getElementById("testButtonC").innerText = userInput.join(''); // Met à jour le texte du bouton
 
